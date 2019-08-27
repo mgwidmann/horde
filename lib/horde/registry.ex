@@ -158,7 +158,7 @@ defmodule Horde.Registry do
   def register(registry, name, value) when is_atom(registry) do
     case lookup(registry, name) do
       [] ->
-        GenServer.call(registry, {:register, name, value, self()})
+        GenServer.call(registry, {:register, name, value, self()}, :infinity)
 
       [{pid, _value}] ->
         {:error, {:already_registered, pid}}
