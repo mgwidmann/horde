@@ -314,7 +314,7 @@ defmodule Horde.Registry do
   def register_name({registry, key, value}, pid), do: register_name(registry, key, value, pid)
 
   defp register_name(registry, key, value, pid) when is_atom(registry) do
-    case GenServer.call(registry, {:register, key, value, pid}) do
+    case GenServer.call(registry, {:register, key, value, pid}, 300_000) do
       {:ok, _pid} -> :yes
       {:error, _} -> :no
     end
